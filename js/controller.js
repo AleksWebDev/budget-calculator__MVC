@@ -4,13 +4,6 @@ const form = document.querySelector('#form');
 const title = document.querySelector('#title');
 const type = document.querySelector('#type');
 const value = document.querySelector('#value');
-const incomesList = document.querySelector('#incomes-list');
-const expensesList = document.querySelector('#expenses-list');
-
-const totalIncomeEl = document.querySelector('#total-income');
-const totalExpenseEl = document.querySelector('#total-expense');
-const budgetEl = document.querySelector('#budget');
-const percentWrapper = document.querySelector('#expense-percents-wrapper');
 
 const monthEl = document.querySelector('#month');
 const yearEl = document.querySelector('#year');
@@ -39,17 +32,15 @@ function calcBudget(){
     
     const totalBudget = totalInc - totalExp;
     let expencePercents = Math.floor((totalExp * 100) / totalInc);
-    
-    if(expencePercents > 0){
-        const html = `<div class="badge">% ${expencePercents}</div>`;
-        percentWrapper.innerHTML = html;
-    }else{
-        percentWrapper.innerHTML = "";
+
+    const summaryBudget = {
+        totalInc: totalInc,
+        totalExp: totalExp,
+        totalBudget: totalBudget,
+        expencePercents: expencePercents,
     }
 
-    budgetEl.innerHTML = view.priceFormatter.format(totalBudget);
-    totalIncomeEl.innerHTML = '+ ' + view.priceFormatter.format(totalInc);
-    totalExpenseEl.innerHTML = '+ ' + view.priceFormatter.format(totalExp);
+    view.calculateBudget(summaryBudget);
 }
 
 function displayMonth(){

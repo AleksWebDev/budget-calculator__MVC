@@ -22,7 +22,7 @@ const priceFormatter = new Intl.NumberFormat('ru-RU', {
 })
 
 // Functions 
-
+//Checking empty fields 
 function checkEmptyFields(){
     //Проверка полей на заполненость 
     if(title.value.trim() === ''){
@@ -41,7 +41,7 @@ function checkEmptyFields(){
 
     return true;
 }
-
+//Rendering expendetures and incomes into the list item
 function renderExpendetureAndIncoms(recodr){
     //Добавление в DOM разметку листа с доходами
     if(recodr.type === 'inc'){
@@ -76,6 +76,22 @@ function renderExpendetureAndIncoms(recodr){
     }
 }
 
+// Rendering total budget
+function calculateBudget(summaryBudget){
+    if(summaryBudget.expencePercents > 0){
+        const html = `<div class="badge">% ${summaryBudget.expencePercents}</div>`;
+        elements.percentWrapper.innerHTML = html;
+    }else{
+        elements.percentWrapper.innerHTML = "";
+    }
+
+    elements.budgetEl.innerHTML = priceFormatter.format(summaryBudget.totalBudget);
+    elements.totalIncomeEl.innerHTML = '+ ' + priceFormatter.format(summaryBudget.totalInc);
+    elements.totalExpenseEl.innerHTML = '+ ' + priceFormatter.format(summaryBudget.totalExp);
+}
 
 
-export {priceFormatter, elements, checkEmptyFields, renderExpendetureAndIncoms};
+
+
+
+export {priceFormatter, elements, checkEmptyFields, renderExpendetureAndIncoms, calculateBudget};
