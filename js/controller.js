@@ -5,9 +5,6 @@ const title = document.querySelector('#title');
 const type = document.querySelector('#type');
 const value = document.querySelector('#value');
 
-const monthEl = document.querySelector('#month');
-const yearEl = document.querySelector('#year');
-
 //Main Data
 const budget = [];
 
@@ -55,19 +52,11 @@ function displayMonth(){
 
     timeFormatter.format(now);
 
-    console.log(year);
-    console.log(month);
-
-    monthEl.innerHTML = month;
-    yearEl.innerHTML = year;
-
+    view.yearAndMonth({year, month});
 }
 displayMonth();
 
-// clear form 
-function clearForm(){
-    form.reset();
-}
+
 
 //action
 form.addEventListener('submit', function(e){
@@ -90,13 +79,14 @@ form.addEventListener('submit', function(e){
         id = idLastElem + 1;
     }
 
+    const dataForm = view.getFormData();
 
     //Создание обьекта 
     let recodr = {
         id: id,
-        type: type.value,
-        title: title.value,
-        value: parseInt(value.value), 
+        type: dataForm.type,
+        title: dataForm.title,
+        value: dataForm.value, 
     }
 
     //Добавления данных в массив budget
@@ -104,7 +94,7 @@ form.addEventListener('submit', function(e){
 
     view.renderExpendetureAndIncoms(recodr);
 
-    clearForm();
+    view.clearForm();
     calcBudget();
 })
 

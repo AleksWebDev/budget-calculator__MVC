@@ -90,8 +90,30 @@ function calculateBudget(summaryBudget){
     elements.totalExpenseEl.innerHTML = '+ ' + priceFormatter.format(summaryBudget.totalExp);
 }
 
+// clear form 
+function clearForm(){
+    elements.form.reset();
+}
+
+// Rendering YearAndMonth
+function yearAndMonth(obj){
+    console.log(obj);
+    elements.monthEl.innerHTML = obj.month;
+    elements.yearEl.innerHTML = obj.year;
+}
 
 
+//Getting data from Form's input
+
+function getFormData(){
+    const FormData = {
+        type: elements.type.value,
+        title: elements.title.value.trim(),
+        value: +elements.value.value,
+    }
+
+    return FormData;
+}
 
 
-export {priceFormatter, elements, checkEmptyFields, renderExpendetureAndIncoms, calculateBudget};
+export {priceFormatter, elements, checkEmptyFields, renderExpendetureAndIncoms, calculateBudget, clearForm, yearAndMonth, getFormData};
